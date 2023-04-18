@@ -1,3 +1,6 @@
+//! # spring-cartographer-rs
+//! 
+
 use self::{smf::SMF, smt::SMT};
 
 pub mod smf;

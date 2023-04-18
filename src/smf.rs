@@ -10,7 +10,6 @@ use std::io::{Read, Seek, SeekFrom};
 /// let mut buf_reader = std::io::BufReader::new(file); 
 /// 
 /// let smf = spring_cartographer_rs::smf::parse_smf(&mut buf_reader).unwrap();
-/// 
 /// ```
 pub fn parse_smf<R: Read + Seek>(reader: &mut R) -> Result<SMF, binrw::Error> {
     SMF::read(reader)
