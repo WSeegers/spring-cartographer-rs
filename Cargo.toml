@@ -3,7 +3,7 @@ name = "spring-cartographer-rs"
 version = "0.1.0"
 edition = "2021"
 description = "A parser for the spring rts engine map files"
-licence = "MIT"
+license = "MIT"
 keywords = ["Spring", "rts", "smt", "smf"]
 
 [dependencies]
