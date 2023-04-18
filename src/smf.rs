@@ -1,6 +1,21 @@
 use binrw::{BinRead, NullString};
 use std::io::{Read, Seek, SeekFrom};
 
+/// Parse a stream into the SMF structure
+/// 
+/// # Example
+/// 
+/// ```
+/// let file = std::fs::File::open("assets/Great_Divide.smf").unwrap();
+/// let mut buf_reader = std::io::BufReader::new(file); 
+/// 
+/// let smf = spring_cartographer_rs::smf::parse_smf(&mut buf_reader).unwrap();
+/// 
+/// ```
+pub fn parse_smf<R: Read + Seek>(reader: &mut R) -> Result<SMF, binrw::Error> {
+    SMF::read(reader)
+}
+
 #[derive(BinRead, Debug, Clone)]
 #[br(magic = b"spring map file\0", little)]
 pub struct SMF {
@@ -146,21 +161,16 @@ pub struct Feature {
     pub relative_size: f32,
 }
 
-pub fn parse_smf<R: Read + Seek>(reader: &mut R) -> Result<SMF, binrw::Error> {
-    SMF::read(reader)
-}
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test() {
-        let smf_raw = include_bytes!("../.temp/great_divide_v1/maps/Great_Divide.smf");
+        let file = std::fs::File::open("assets/Great_Divide.smf").unwrap();
+        let mut buf_reader = std::io::BufReader::new(file);
 
-        let mut c = std::io::Cursor::new(smf_raw);
-
-        let smf = SMF::read(&mut c).unwrap();
+        let smf = parse_smf(&mut buf_reader).unwrap();
 
         dbg!(smf.header);
 

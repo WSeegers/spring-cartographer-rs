@@ -35,16 +35,16 @@ pub struct Tile {
 mod test {
     use super::*;
 
-    // #[test]
-    // fn test() {
-    //     let smt_raw = include_bytes!("../../assets/.temp/great_divide_v1/maps/Great_Divide.smt");
+    #[test]
+    fn test() {
+        let smt_raw = include_bytes!("../.temp/great_divide_v1/maps/Great_Divide.smt");
 
-    //     let mut c = std::io::Cursor::new(smt_raw);
+        let mut c = std::io::Cursor::new(smt_raw);
 
-    //     let smt = SMT::read(&mut c).unwrap();
+        let smt = SMT::read(&mut c).unwrap();
 
-    //     // dbg!(String::from_utf8_lossy(&smt.header.magic_number));
-    //     dbg!(smt.header);
-    //     dbg!(smt.tiles.len());
-    // }
+        // dbg!(String::from_utf8_lossy(&smt.header.magic_number));
+        dbg!(smt.header);
+        dbg!(smt.tiles.len());
+    }
 }
